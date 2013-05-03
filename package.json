@@ -1,0 +1,43 @@
+{
+  "name": "conform",
+  "version": "0.0.0",
+  "description": "Simple node.js form validation inspired by mongoose schematypes",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test",
+    "blanket": {
+      "pattern": [
+        "conform/lib"
+      ]
+    }
+  },
+  "repository": "",
+  "keywords": [
+    "connect",
+    "express",
+    "form",
+    "validation"
+  ],
+  "author": "@nrako",
+  "license": "BSD",
+  "dependencies": {
+    "lodash": "~1.2.1",
+    "ms": "~0.6.0",
+    "sliced": "0.0.5",
+    "mpath": "~0.2.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "glob": "~3.2.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-jsvalidate": "~0.2.1",
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-contrib-jshint": "~0.4.3",
+    "chai": "~1.6.0",
+    "matchdep": "~0.1.2",
+    "grunt-mocha-cov": "0.0.4",
+    "blanket": "~1.1.4",
+    "travis-cov": "~0.2.4",
+    "coffee-script": "~1.6.2"
+  }
+}

@@ -1,0 +1,8 @@
+coverage.html
+npm-debug.log
+test
+docs
+node_modules
+Gruntfile.js
+.editorconfig
+.jshintrc
