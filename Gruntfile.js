@@ -40,15 +40,27 @@ module.exports = function(grunt) {
     },
 
     mochacov: {
-      options: {
-        compilers: ['coffee:coffee-script'],
-        timeout: 3000,
-        ignoreLeaks: false,
-        ui: 'bdd',
-        coverage: true,
-        reporter: 'spec'
+      coverage: {
+        options: {
+          compilers: ['coffee:coffee-script'],
+          timeout: 3000,
+          ignoreLeaks: false,
+          ui: 'bdd',
+          coverage: true,
+          reporter: 'html-cov'
+        },
+        all: { src: ['test/**/*.spec.coffee'] }
       },
-      all: { src: ['test/**/*.spec.coffee'] }
+      test: {
+        options: {
+          compilers: ['coffee:coffee-script'],
+          timeout: 3000,
+          ignoreLeaks: false,
+          ui: 'bdd',
+          reporter: 'spec'
+        },
+        all: { src: ['test/**/*.spec.coffee'] }
+      }
     },
 
     clean: { // grunt-contrib-clean
@@ -68,23 +80,24 @@ module.exports = function(grunt) {
       }
     },
 
-    groc: { // grunt-groc
-      javascript: [
-        'lib/**/*.js', 'README.md'
-      ],
-      options: {
-        'out': 'docs/groc'
-      }
-    },
-
     plato: { // grunt-plato
       def: {
         options : {
           jshint : grunt.file.readJSON('.jshintrc')
         },
         files: {
-          'docs/plato': ['public/js/**/*.js']
+          'docs/plato': ['lib/**/*.js']
         }
+      }
+    },
+
+    dox: {
+      options: {
+        title: 'test'
+      },
+      files: {
+        src: ['lib/'],
+        dest: 'docs/dox'
       }
     }
 

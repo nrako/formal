@@ -9,7 +9,8 @@
       "pattern": [
         "conform/lib"
       ]
-    }
+    },
+    "coverage": "grunt mochacov:coverage > coverage.html"
   },
   "repository": "",
   "keywords": [
@@ -22,8 +23,6 @@
   "license": "BSD",
   "dependencies": {
     "lodash": "~1.2.1",
-    "ms": "~0.6.0",
-    "sliced": "0.0.5",
     "mpath": "~0.2.1"
   },
   "devDependencies": {
@@ -38,6 +37,9 @@
     "grunt-mocha-cov": "0.0.4",
     "blanket": "~1.1.4",
     "travis-cov": "~0.2.4",
-    "coffee-script": "~1.6.2"
+    "coffee-script": "~1.6.2",
+    "grunt-contrib-yuidoc": "~0.4.0",
+    "grunt-plato": "~0.2.0",
+    "grunt-dox": "~0.4.1"
   }
 }
