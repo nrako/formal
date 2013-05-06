@@ -1,7 +1,7 @@
 {
   "name": "conform",
-  "version": "0.0.0",
-  "description": "Simple node.js form validation inspired by mongoose schematypes",
+  "version": "0.0.1",
+  "description": "Simple, flexible node.js form module with casting and validation; inspired by mongoose",
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
@@ -12,15 +12,20 @@
     },
     "coverage": "grunt mochacov:coverage > coverage.html"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/nrako/conform",
+  },
+  "bugs": { "url" : "http://github.com/nrako/conform/issues"},
   "keywords": [
     "connect",
     "express",
     "form",
-    "validation"
+    "validation",
+    "mongoose"
   ],
-  "author": "@nrako",
-  "license": "BSD",
+  "author": "@nrako <nico@nrako.com>",
+  "license": "MIT",
   "dependencies": {
     "lodash": "~1.2.1",
     "mpath": "~0.2.1"
@@ -29,17 +34,17 @@
     "grunt": "~0.4.1",
     "glob": "~3.2.1",
     "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-yuidoc": "~0.4.0",
+    "grunt-contrib-jshint": "~0.4.3",
     "grunt-jsvalidate": "~0.2.1",
     "grunt-simple-mocha": "~0.4.0",
-    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-mocha-cov": "0.0.4",
+    "grunt-dox": "~0.4.1",
+    "grunt-plato": "~0.2.0",
     "chai": "~1.6.0",
     "matchdep": "~0.1.2",
-    "grunt-mocha-cov": "0.0.4",
     "blanket": "~1.1.4",
     "travis-cov": "~0.2.4",
-    "coffee-script": "~1.6.2",
-    "grunt-contrib-yuidoc": "~0.4.0",
-    "grunt-plato": "~0.2.0",
-    "grunt-dox": "~0.4.1"
+    "coffee-script": "~1.6.2"
   }
 }
