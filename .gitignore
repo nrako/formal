@@ -3,5 +3,5 @@ npm-debug.log
 coverage.html
 *.sublime-workspace
 *.sublime-project
-_site
+_gh-pages
 docs
