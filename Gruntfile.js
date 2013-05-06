@@ -67,19 +67,6 @@ module.exports = function(grunt) {
       docs: ['docs/']
     },
 
-    yuidoc: { // grunt-contrib-yuidoc
-      compile: {
-        name: '<%= pkg.name %>',
-        description: '<%= pkg.description %>',
-        version: '<%= pkg.version %>',
-        url: '<%= pkg.homepage %>',
-        options: {
-          paths: 'lib/',
-          outdir: 'docs/api/'
-        }
-      }
-    },
-
     plato: { // grunt-plato
       def: {
         options : {
@@ -93,10 +80,10 @@ module.exports = function(grunt) {
 
     dox: {
       options: {
-        title: 'test'
+        title: 'Conform'
       },
       files: {
-        src: ['lib/'],
+        src: ['lib/form.js', 'lib/field/field.js', 'lib/error.js', 'lib/virtualtype.js'],
         dest: 'docs/dox'
       }
     }
@@ -109,6 +96,6 @@ module.exports = function(grunt) {
   // Run server-side tests
   grunt.registerTask('test', ['jshint', 'jsvalidate', 'simplemocha']);
 
-  // Generates the docs api (yuidoc) and inline docs (groc)
-  //grunt.registerTask('docs', ['clean:docs', 'groc', 'yuidoc', 'plato']);
+  // Generates the docs api (dox) and the plato report
+  grunt.registerTask('docs', ['clean:docs', 'plato', 'dox']);
 };

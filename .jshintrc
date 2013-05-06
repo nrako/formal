@@ -18,6 +18,7 @@
   "undef": true,
   "unused": false,
   "eqnull": true,
+  "boss": true,
   "trailing": true,
   "maxdepth": 4
 }
