@@ -43,9 +43,7 @@ form.validate(function (err) {
 ```
 
 ## Install
-```
-npm install conform --save
-```
+`npm install conform --save`
 
 ## Summary
 
@@ -77,7 +75,7 @@ This module focus on form field casting and validation, with suppports for advan
 
 ## API
 
-Summary of the most useful methods. For a complete list see [documentation](TODO ADD LINK).
+Summary of the most useful methods. For a complete list see [documentation](http://nrako.github.io/conform).
 
 ### new Form(Object:definition[, Object:option]):instance
 
@@ -95,6 +93,7 @@ app.post('/url',
     console.log(res.locals.form.fieldA.value);
   }
 );
+```
 
 ### form.field(obj:Object):this
 
@@ -106,6 +105,7 @@ form.set({
     'of.a.nested.field': String
   }
 });
+```
 
 ### form.virtual(name:String, options:Object)
 
@@ -124,12 +124,12 @@ Validate all fields and return an err object, if any, via the callback function.
 ### form.middleware():Function(req, res, next)
 
 Provide a route-middleware à la connect/express which will monkey patch
-the ```req.body.form``` and ```res.locals.form```.
+the `req.body.form` and `res.locals.form`.
 
 ## Test
-```npm test```
-[Coverage](TODO ADD LINK)
-```npm run-script coverage```
+`npm test`
+[Coverage](http://nrako.github.io/conform/coverage.html)
+`npm run-script coverage`
 
 Tests are in Coffee-script and easy to read! Provides a great way to understand the API.
 
