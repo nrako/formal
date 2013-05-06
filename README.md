@@ -1,10 +1,13 @@
 # Conform
+[![Build Status](https://travis-ci.org/nrako/conform.png?branch=master)](https://travis-ci.org/nrako/conform)
+[![Coverage Status](https://coveralls.io/repos/nrako/conform/badge.png?branch=master)](https://coveralls.io/r/nrako/conform)
+[![Dependency Status](https://gemnasium.com/nrako/conform.png)](https://gemnasium.com/nrako/conform)
 
-**con·form  [kuhn-fawrm]**
-*~~verb~~ form (used ~~without~~ via object)*
-**1.** to act in accordance or harmony; comply (usually followed by to  ): *to conform to rules.*
+**con·form  [kuhn-fawrm]**  
+*~~verb~~ form (used ~~without~~ via object)*  
+**1.** to act in accordance or harmony; comply (usually followed by to  ): *to conform to rules.*  
 
-**Conform is an awesome node.js FORM module with casting and validation inspired by mongoose!**
+**Conform is an awesome node.js Form module with casting and validation inspired by mongoose!**
 
 ## Example
 ```javascript
@@ -75,7 +78,8 @@ This module focus on form field casting and validation, with suppports for advan
 
 ## API
 
-Summary of the most useful methods. For a complete list see [documentation](http://nrako.github.io/conform).
+Summary of the most useful methods.  
+For a complete list see [gh-pages documentation](http://nrako.github.io/conform).
 
 ### new Form(Object:definition[, Object:option]):instance
 
@@ -106,8 +110,6 @@ form.set({
   }
 });
 ```
-
-### form.virtual(name:String, options:Object)
 
 ### form.path(path:String):Field (arity 1)
 

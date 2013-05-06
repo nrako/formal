@@ -40,6 +40,14 @@ module.exports = function(grunt) {
     },
 
     mochacov: {
+      travis: {
+        options: {
+          coveralls: {
+            serviceName: 'travis-ci',
+            repoToken: '12Mql78WWZIIYPNTYIAYdOewouuQqpoHr'
+          }
+        }
+      },
       coverage: {
         options: {
           compilers: ['coffee:coffee-script'],
@@ -64,7 +72,7 @@ module.exports = function(grunt) {
     },
 
     clean: { // grunt-contrib-clean
-      docs: ['docs/']
+      docs: ['_gh-pages/dox/', '_gh-pages/plato/']
     },
 
     plato: { // grunt-plato
@@ -73,7 +81,7 @@ module.exports = function(grunt) {
           jshint : grunt.file.readJSON('.jshintrc')
         },
         files: {
-          'docs/plato': ['lib/**/*.js']
+          '_gh-pages/plato': ['lib/**/*.js']
         }
       }
     },
@@ -84,7 +92,7 @@ module.exports = function(grunt) {
       },
       files: {
         src: ['lib/form.js', 'lib/field/field.js', 'lib/error.js', 'lib/virtualtype.js'],
-        dest: 'docs/dox'
+        dest: '_gh-pages/dox'
       }
     }
 
@@ -95,7 +103,8 @@ module.exports = function(grunt) {
 
   // Run server-side tests
   grunt.registerTask('test', ['jshint', 'jsvalidate', 'simplemocha']);
+  grunt.registerTask('travis', ['jshint', 'mochacov:travis']);
 
   // Generates the docs api (dox) and the plato report
-  grunt.registerTask('docs', ['clean:docs', 'plato', 'dox']);
+  grunt.registerTask('gh-pages', ['clean:docs', 'plato', 'dox']);
 };

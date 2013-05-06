@@ -26,6 +26,9 @@
   ],
   "author": "@nrako <nico@nrako.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">= v0.8.0"
+  },
   "dependencies": {
     "lodash": "~1.2.1",
     "mpath": "~0.2.1"
