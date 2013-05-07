@@ -39,7 +39,7 @@ module.exports = function(grunt) {
       all: { src: ['test/**/*.spec.coffee'] }
     },
 
-    mochacov: {
+    mochacov: { // grunt-mocha-cov
       coverage: {
         options: {
           compilers: ['coffee:coffee-script'],
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
       }
     },
 
-    dox: {
+    dox: { // grunt-dox
       options: {
         title: 'Conform'
       },

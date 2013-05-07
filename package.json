@@ -10,7 +10,7 @@
         "conform/lib"
       ]
     },
-    "coverage": "grunt mochacov:coverage > coverage.html"
+    "coverage": "grunt mochacov:coverage > _gh-pages/coverage.html"
   },
   "repository": {
     "type": "git",
