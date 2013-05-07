@@ -1,5 +1,5 @@
 {
-  "name": "conform",
+  "name": "formal",
   "version": "0.0.1",
   "description": "Simple, flexible node.js form module with casting and validation; inspired by mongoose",
   "main": "index.js",
@@ -7,16 +7,16 @@
     "test": "grunt test",
     "blanket": {
       "pattern": [
-        "conform/lib"
+        "formal/lib"
       ]
     },
     "coverage": "grunt mochacov:coverage > _gh-pages/coverage.html"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/nrako/conform"
+    "url": "http://github.com/nrako/formal"
   },
-  "bugs": { "url" : "http://github.com/nrako/conform/issues"},
+  "bugs": { "url" : "http://github.com/nrako/formal/issues"},
   "keywords": [
     "connect",
     "express",

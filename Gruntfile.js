@@ -84,7 +84,7 @@ module.exports = function(grunt) {
 
     dox: { // grunt-dox
       options: {
-        title: 'Conform'
+        title: 'Formal'
       },
       files: {
         src: ['lib/form.js', 'lib/field/field.js', 'lib/error.js', 'lib/virtualtype.js'],

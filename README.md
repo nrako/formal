@@ -1,18 +1,14 @@
-# Conform
+# Formal
 
-**con·form  [kuhn-fawrm]**  
-*~~verb~~ form (used ~~without~~ via object)*  
-**1.** to act in accordance or harmony; comply (usually followed by to  ): *to conform to rules.*  
+**Formal is an awesome node.js Form module with casting and validation inspired by mongoose!**
 
-**Conform is an awesome node.js Form module with casting and validation inspired by mongoose!**
-
-[![Build Status](https://travis-ci.org/nrako/conform.png?branch=master)](https://travis-ci.org/nrako/conform)
-[![Coverage Status](https://coveralls.io/repos/nrako/conform/badge.png?branch=master)](https://coveralls.io/r/nrako/conform)
-[![Dependency Status](https://gemnasium.com/nrako/conform.png)](https://gemnasium.com/nrako/conform)
+[![Build Status](https://travis-ci.org/nrako/formal.png?branch=master)](https://travis-ci.org/nrako/formal)
+[![Coverage Status](https://coveralls.io/repos/nrako/formal/badge.png?branch=master)](https://coveralls.io/r/nrako/formal)
+[![Dependency Status](https://gemnasium.com/nrako/formal.png)](https://gemnasium.com/nrako/formal)
 
 ## Example
 ```javascript
-var Form = require('conform');
+var Form = require('formal');
 
 var form = new Form({
   name: {
@@ -47,7 +43,7 @@ form.validate(function (err) {
 ```
 
 ## Install
-`npm install conform --save`
+`npm install formal --save`
 
 ## Summary
 
@@ -80,7 +76,7 @@ This module focus on form field casting and validation, with suppports for advan
 ## API
 
 Summary of the most useful methods.  
-For a complete list see [gh-pages documentation](http://nrako.github.io/conform).
+For a complete list see [gh-pages documentation](http://nrako.github.io/formal).
 
 ### new Form(Object:definition[, Object:option]):instance
 
@@ -131,7 +127,7 @@ the `req.body.form` and `res.locals.form`.
 
 ## Test
 `npm test`  
-[Coverage](http://nrako.github.io/conform/coverage.html)  
+[Coverage](http://nrako.github.io/formal/coverage.html)  
 `npm run-script coverage`
 
 All tests are in Coffee-script, hence easy to read! Provides a great way to understand the API ;)
