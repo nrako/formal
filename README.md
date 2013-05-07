@@ -1,10 +1,6 @@
-# Formal
+# Formal [![Build Status](https://travis-ci.org/nrako/formal.png?branch=master)](https://travis-ci.org/nrako/formal) [![Coverage Status](https://coveralls.io/repos/nrako/formal/badge.png?branch=master)](https://coveralls.io/r/nrako/formal) [![Dependency Status](https://gemnasium.com/nrako/formal.png)](https://gemnasium.com/nrako/formal)
 
-**Formal is an awesome node.js Form module with casting and validation inspired by mongoose!**
-
-[![Build Status](https://travis-ci.org/nrako/formal.png?branch=master)](https://travis-ci.org/nrako/formal)
-[![Coverage Status](https://coveralls.io/repos/nrako/formal/badge.png?branch=master)](https://coveralls.io/r/nrako/formal)
-[![Dependency Status](https://gemnasium.com/nrako/formal.png)](https://gemnasium.com/nrako/formal)
+Formal is an awesome node.js Form module with casting and validation inspired by mongoose!
 
 ## Example
 ```javascript

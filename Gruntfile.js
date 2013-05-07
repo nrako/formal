@@ -50,7 +50,7 @@ module.exports = function(grunt) {
           reporter: 'html-cov',
           coveralls: {
             serviceName: 'travis-ci',
-            repoToken: '12Mql78WWZIIYPNTYIAYdOewouuQqpoHr'
+            repoToken: 'wNX32It8BED6agbtjuOuBj6KOVhKBgb7q'
           }
         },
         all: { src: ['test/**/*.spec.coffee'] }
