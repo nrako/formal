@@ -213,10 +213,10 @@ describe 'Form', ->
   describe 'options', ->
 
     it 'supports options through constructor and form.option method', ->
-      form = new Form({
-        test: String}
+      form = new Form
+        test: String
+      ,
         autoTrim: true
-      )
 
       expect(form.option 'autoTrim').to.be.true
 
@@ -224,13 +224,64 @@ describe 'Form', ->
 
       expect(form.option 'autoTrim').to.be.false
 
-    # TODO check each form options
-    ###
-    dataSources: ['body', 'query', 'params'],
-    autoTrim: false,
-    autoLocals: true,
-    passThrough: false,
-    ###
+    it 'supports option.autoTrim', ->
+      form = new Form
+        test:String
+      ,
+        autoTrim: true
+
+      form.set
+        test: ' test   '
+
+      expect(form.get 'test').to.equal 'test'
+
+    it 'supports option.autoLocals', (done) ->
+      form = new Form
+        test: String
+      ,
+        autoLocals: false
+
+      request =
+        body:
+          test: 'no locals'
+
+      response =
+        locals: {}
+
+      cb = ->
+        expect(response.locals.form).to.be.undefined
+
+        done()
+
+      form.middleware() request, response, cb
+
+    it 'supports option.body', (done) ->
+      form = new Form
+        test: String
+        test2: String
+        test3: String
+      ,
+        dataSources: ['query', 'params']
+
+      request =
+        body:
+          test: 'body'
+        query:
+          test2: 'query'
+        params:
+          test3: 'params'
+
+      response =
+        locals: {}
+
+      cb = ->
+        expect(request.form.get 'test').to.be.undefined
+        expect(request.form.get 'test2').to.equal 'query'
+        expect(request.form.get 'test3').to.equal 'params'
+
+        done()
+
+      form.middleware() request, response, cb
 
   describe 'setters and getters', ->
 
