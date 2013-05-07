@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>field/string.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">73.12</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">218</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="span6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="span6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">45.50</p>
+    </div>
+    <div class="span6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">1.02</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="span6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="span12">/* jshint bitwise: false */
+/*!
+ * Module dependencies.
+ */
+
+var Field = require('./field'),
+    util = require('util'),
+    CastError = Field.CastError,
+    Document;
+
+/**
+ * String Field constructor.
+ *
+ * @param {String} key
+ * @param {Object} options
+ * @inherits Field
+ * @api private
+ */
+
+function FieldString (key, options) {
+  this.enumValues = [];
+  this.regExp = null;
+  Field.call(this, key, options, 'String');
+}
+
+/*!
+ * Inherits from Field.
+ */
+
+util.inherits(FieldString, Field);
+
+/**
+ * Adds enumeration values and a coinciding validator.
+ *
+ * ####Example:
+ *
+ *     var states = 'opening open closing closed'.split(' ')
+ *     var f = new Form({ state: { type: String, enum: states })
+ *     app.post('/url', f, function (req, res) {
+ *       if (!req.form.isValid())
+ *         console.error(req.form.errors);
+ *     });
+ *
+ * @param {String} [args...] enumeration values
+ * @api public
+ */
+
+FieldString.prototype.enum = function () {
+  var len = arguments.length;
+  if (!len || undefined === arguments[0] || false === arguments[0]) {
+    if (this.enumValidator){
+      this.enumValidator = false;
+      this.validators = this.validators.filter(function(v){
+        return v[1] != 'enum';
+      });
+    }
+    return;
+  }
+
+  for (var i = 0; i < len; i++) {
+    if (undefined !== arguments[i]) {
+      this.enumValues.push(this.cast(arguments[i]));
+    }
+  }
+
+  if (!this.enumValidator) {
+    var values = this.enumValues;
+    this.enumValidator = function(v){
+      return undefined === v || ~values.indexOf(v);
+    };
+    this.validators.push([this.enumValidator, 'enum']);
+  }
+};
+
+/**
+ * Adds a lowercase setter.
+ *
+ * ####Example:
+ *
+ *     var s = new FieldString({ email: { type: String, lowercase: true }})
+ *     var M = db.model('M', s);
+ *     var m = new M({ email: 'SomeEmail@example.COM' });
+ *     console.log(m.email) // someemail@example.com
+ *
+ * @api public
+ */
+
+FieldString.prototype.lowercase = function () {
+  return this.set(function (v, self) {
+    if ('string' != typeof v) v = self.cast(v);
+    if (v) return v.toLowerCase();
+    return v;
+  });
+};
+
+/**
+ * Adds an uppercase setter.
+ *
+ * ####Example:
+ *
+ *     var s = new FieldString({ caps: { type: String, uppercase: true }})
+ *     var M = db.model('M', s);
+ *     var m = new M({ caps: 'an example' });
+ *     console.log(m.caps) // AN EXAMPLE
+ *
+ * @api public
+ */
+
+FieldString.prototype.uppercase = function () {
+  return this.set(function (v, self) {
+    if ('string' != typeof v) v = self.cast(v);
+    if (v) return v.toUpperCase();
+    return v;
+  });
+};
+
+/**
+ * Adds a trim setter.
+ *
+ * The string value will be trimmed when set.
+ *
+ * ####Example:
+ *
+ *     var s = new FieldString({ name: { type: String, trim: true }})
+ *     var M = db.model('M', s)
+ *     var string = ' some name '
+ *     console.log(string.length) // 11
+ *     var m = new M({ name: string })
+ *     console.log(m.name.length) // 9
+ *
+ * @api public
+ */
+
+FieldString.prototype.trim = function () {
+  return this.set(function (v, self) {
+    if ('string' != typeof v) v = self.cast(v);
+    if (v) return v.trim();
+    return v;
+  });
+};
+
+/**
+ * Sets a regexp validator.
+ *
+ * Any value that does not pass `regExp`.test(val) will fail validation.
+ *
+ * ####Example:
+ *
+ *     var s = new FieldString({ name: { type: String, match: /^a/ }})
+ *     var M = db.model('M', s)
+ *     var m = new M({ name: 'invalid' })
+ *     m.validate(function (err) {
+ *       console.error(err) // validation error
+ *       m.name = 'apples'
+ *       m.validate(function (err) {
+ *         assert.ok(err) // success
+ *       })
+ *     })
+ *
+ * @param {RegExp} regExp regular expression to test against
+ * @api public
+ */
+
+FieldString.prototype.match = function match (regExp) {
+  this.validators.push([function(v){
+    return null != v && '' !== v ? regExp.test(v) : true;
+  }, 'regexp']);
+};
+
+/**
+ * Check required
+ *
+ * @param {String|null|undefined} value
+ * @api private
+ */
+
+FieldString.prototype.checkRequired = function checkRequired (value, doc) {
+  return (value instanceof String || typeof value == 'string') && value.length;
+};
+
+/**
+ * Casts to String
+ *
+ * @api private
+ */
+
+FieldString.prototype.cast = function (value, doc, init) {
+  if (value === null) {
+    return value;
+  }
+
+  if ('undefined' !== typeof value) {
+    if (value.toString) {
+      return value.toString();
+    }
+  }
+
+
+  throw new CastError('string', value, this.path);
+};
+
+FieldString.prototype.export = function() {
+  FieldString.super_.prototype.export.call(this);
+
+  var attr = this.options.attributes || (this.options.attributes = {});
+
+  if (this.enumValues.length) {
+    if (this.enumValues.length === 2 && this.isRequired)
+      attr.type = 'radio';
+    else
+      attr.type = 'checkbox';
+  } else {
+    attr.type = 'text';
+  }
+
+  return this.options;
+};
+
+/*!
+ * Module exports.
+ */
+
+module.exports = FieldString;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
