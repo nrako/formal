@@ -90,6 +90,8 @@ describe 'Form', ->
         date: new Date
         number: 234
         bool: true
+        unknown:
+          sub: 'not set'
 
       form.set obj
 
@@ -97,6 +99,7 @@ describe 'Form', ->
       expect(form.get 'date').to.equal obj.date
       expect(form.get 'number').to.equal obj.number
       expect(form.get 'bool').to.equal obj.bool
+      expect(form.get 'unknown.sub').to.be.undefined
 
       fn = ->
         form.field
