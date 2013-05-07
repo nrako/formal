@@ -130,11 +130,11 @@ Provide a route-middleware à la connect/express which will monkey patch
 the `req.body.form` and `res.locals.form`.
 
 ## Test
-`npm test`
-[Coverage](http://nrako.github.io/conform/coverage.html)
+`npm test`  
+[Coverage](http://nrako.github.io/conform/coverage.html)  
 `npm run-script coverage`
 
-Tests are in Coffee-script and easy to read! Provides a great way to understand the API.
+All tests are in Coffee-script, hence easy to read! Provides a great way to understand the API ;)
 
 ## LICENSE
 
