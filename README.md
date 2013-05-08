@@ -1,6 +1,6 @@
 # Formal [![Build Status](https://travis-ci.org/nrako/formal.png?branch=master)](https://travis-ci.org/nrako/formal) [![Coverage Status](https://coveralls.io/repos/nrako/formal/badge.png?branch=master)](https://coveralls.io/r/nrako/formal) [![Dependency Status](https://gemnasium.com/nrako/formal.png)](https://gemnasium.com/nrako/formal)
 
-Formal is an awesome node.js Form module with casting and validation inspired by mongoose!
+Formal is an awesome Form module for node.js with casting and validation inspired by mongoose!
 
 ## Example
 ```javascript
@@ -123,8 +123,9 @@ the `req.body.form` and `res.locals.form`.
 
 ## Test
 `npm test`  
-[Coverage](http://nrako.github.io/formal/coverage.html)  
-`npm run-script coverage`
+[Mocha Coverage](http://nrako.github.io/formal/coverage.html)  
+`npm run-script coverage`  
+[On Coveralls.io](https://coveralls.io/r/nrako/formal)
 
 All tests are in Coffee-script, hence easy to read! Provides a great way to understand the API ;)
 

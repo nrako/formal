@@ -40,30 +40,31 @@ module.exports = function(grunt) {
     },
 
     mochacov: { // grunt-mocha-cov
-      coverage: {
+      coveralls: {
         options: {
-          compilers: ['coffee:coffee-script'],
-          timeout: 3000,
-          ignoreLeaks: false,
-          ui: 'bdd',
-          coverage: true,
-          reporter: 'html-cov',
           coveralls: {
             serviceName: 'travis-ci',
             repoToken: 'wNX32It8BED6agbtjuOuBj6KOVhKBgb7q'
           }
-        },
-        all: { src: ['test/**/*.spec.coffee'] }
+        }
+      },
+      coverage: {
+        options: {
+          coverage: true,
+          reporter: 'html-cov'
+        }
       },
       test: {
         options: {
-          compilers: ['coffee:coffee-script'],
-          timeout: 3000,
-          ignoreLeaks: false,
-          ui: 'bdd',
           reporter: 'spec'
-        },
-        all: { src: ['test/**/*.spec.coffee'] }
+        }
+      },
+      all: { src: ['test/**/*.spec.coffee'] },
+      options: {
+        ui: 'bdd',
+        timeout: 3000,
+        ignoreLeaks: false,
+        compilers: ['coffee:coffee-script']
       }
     },
 
@@ -99,7 +100,7 @@ module.exports = function(grunt) {
 
   // Run server-side tests
   grunt.registerTask('test', ['jshint', 'jsvalidate', 'simplemocha']);
-  grunt.registerTask('travis', ['mochacov:coverage']);
+  grunt.registerTask('travis', ['mochacov:test']);
 
   // Generates the docs api (dox) and the plato report
   grunt.registerTask('gh-pages', ['clean:docs', 'plato', 'dox']);
