@@ -62,17 +62,17 @@ describe 'Form', ->
         this.price - this.cost
 
       form.virtual('fullname').set (val) ->
-        this.set
-          name:
-            firstName: val.split(' ')[0]
-          'name.familyName': val.split(' ')[1]
+        console.log this
+        this.name =
+          firstName: val.split(' ')[0]
+          familyName: val.split(' ')[1]
 
       form.set
         'fullname': 'John Doe'
 
       expect(form.get 'margin').to.equal 2325 - 2100
       expect(form.get 'name.firstName').to.equal 'John'
-      expect(form.get 'name.familyName').to.equal 'DOE'
+      expect(form.get 'name.familyName').to.equal 'Doe'
 
 
   describe 'fieldtypes and casting', ->
