@@ -50,28 +50,28 @@
   <span class="nx">email</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">match</span><span class="o">:</span> <span class="p">[</span><span class="sr">/^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/</span><span class="p">,</span> <span class="s1">'email],</span>
-<span class="s1">    attributes: {</span>
-<span class="s1">      type: '</span><span class="nx">email</span><span class="s1">'</span>
-<span class="s1">    }</span>
-<span class="s1">  },</span>
-<span class="s1">  age: {type: Number, min: 18}</span>
-<span class="s1">}, {</span>
-<span class="s1">  errors: {</span>
-<span class="s1">    // custom error message for match validator</span>
-<span class="s1">    email: '</span><span class="nx">Value</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">a</span> <span class="nx">valid</span> <span class="nx">email</span><span class="s1">'</span>
-<span class="s1">}</span>
-<span class="s1">});</span>
+    <span class="nx">match</span><span class="o">:</span> <span class="p">[</span><span class="sr">/^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">],</span>
+    <span class="nx">attributes</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="s1">'email'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">age</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="nb">Number</span><span class="p">,</span> <span class="nx">min</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="p">},</span> <span class="p">{</span>
+  <span class="nx">errors</span><span class="o">:</span> <span class="p">{</span>
+    <span class="c1">// custom error message for match validator</span>
+    <span class="nx">email</span><span class="o">:</span> <span class="s1">'Value is not a valid email'</span>
+<span class="p">}</span>
+<span class="p">});</span>
 
-<span class="s1">form.set({</span>
-<span class="s1">  name: {family: '</span><span class="nx">Martinez</span><span class="s1">'},</span>
-<span class="s1">  '</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="s1">': '</span><span class="nx">Jos</span><span class="err">é</span> <span class="nx">Luis</span> <span class="nx">Chavez</span><span class="s1">',</span>
-<span class="s1">  age: 12</span>
-<span class="s1">});</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="p">{</span><span class="nx">family</span><span class="o">:</span> <span class="s1">'Martinez'</span><span class="p">},</span>
+  <span class="s1">'name.first'</span><span class="o">:</span> <span class="s1">'José Luis Chavez'</span><span class="p">,</span>
+  <span class="nx">age</span><span class="o">:</span> <span class="mi">12</span>
+<span class="p">});</span>
 
-<span class="s1">form.validate(function (err) {</span>
-<span class="s1">  console.log(err); // missing required email, age to low</span>
-<span class="s1">  console.log(form.get('</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="mi">0</span><span class="err">'</span><span class="p">));</span> <span class="c1">// José</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="c1">// missing required email, age to low</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">form</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'name.first.0'</span><span class="p">));</span> <span class="c1">// José</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">form</span><span class="p">.</span><span class="kr">export</span><span class="p">());</span> <span class="c1">// data with nice error messages</span>
 <span class="p">});</span>
 </pre></div>
