@@ -20,7 +20,7 @@ var form = new Form({
   email: {
     type: String,
     required: true,
-    match: [/^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/, 'email],
+    match: [/^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/, 'email'],
     attributes: {
       type: 'email'
     }
