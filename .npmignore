@@ -1,4 +1,10 @@
+npm-debug.log
+coverage.html
+*.sublime-workspace
+*.sublime-project
+_gh-pages
 .npmignore
+.git
 .gitignore
 test
 Gruntfile.js
