@@ -25,10 +25,11 @@ describe 'Form validation', ->
       2: -9
 
     form.validate (err) ->
+      expect(err).to.be.an.instanceof require '../lib/errors/validation'
+      expect(err.toString()).to.be.a.string
       expect(err.errors[1]).to.be.an.instanceof require '../lib/errors/validator'
       expect(err.errors[2]).to.be.an.instanceof require '../lib/errors/validator'
       expect(err.errors[3]).to.be.an.instanceof require '../lib/errors/validator'
-      forcoverage = err.toString()
 
       form.path(1).max 9, 'custom msg'
       form.path(3).min(null)
