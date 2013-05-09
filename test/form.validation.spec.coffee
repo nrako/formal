@@ -152,3 +152,38 @@ describe 'Form validation', ->
         expect(err.errors['one']).to.be.undefined
         expect(err.errors['tree']).to.be.an.instanceof require '../lib/errors/validator'
         done()
+
+  it 'supports nice custom errors message for required, min, max and custom validator', (done) ->
+    form = new Form
+      a:
+        type: String
+        required: true
+      b:
+        type: Number
+        min: 8
+      c:
+        type: Number
+        max: 8
+      d:
+        type: String
+        validate: [/^a/, 'startWithA']
+        label: 'Field D'
+    ,
+    errors:
+      max: '<%= value %> should be at max at <%= data.max %>!'
+      startWithA: '<%= data.label %> with value "<%= value %>" must start with "a"'
+
+    form.set
+      b: 0
+      c: 23
+      d: 'test'
+
+    form.validate (err) ->
+      o = form.export(err)
+      expect(o.a.error).to.equal _.template(form.options.errors.required, {})
+      expect(o.b.error).to.equal _.template(form.options.errors.min, {data: {min: 8}})
+      expect(o.c.error).to.equal _.template(form.options.errors.max, {data: {max: 8}, value: '23'})
+      expect(o.d.error).to.equal _.template(form.options.errors.startWithA, {data: {label: 'Field D'}, value: 'test'})
+
+
+      done()

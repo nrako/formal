@@ -62,7 +62,6 @@ describe 'Form', ->
         this.price - this.cost
 
       form.virtual('fullname').set (val) ->
-        console.log this
         this.name =
           firstName: val.split(' ')[0]
           familyName: val.split(' ')[1]
@@ -118,6 +117,7 @@ describe 'Form', ->
         6:
           type: String
           default: 'string default'
+        7: String
 
       form.set
         1: 'value'
@@ -132,6 +132,10 @@ describe 'Form', ->
       expect(form.get '4').to.equal 'val,3'
       expect(form.get '5').to.be.null
       expect(form.get '6').to.equal form.path('6').default()
+
+      form.set '1', null
+
+      expect(form.get '1').to.be.null
 
     it 'supports Number', ->
       form = new Form
@@ -223,6 +227,13 @@ describe 'Form', ->
       form.option 'autoTrim', false
 
       expect(form.option 'autoTrim').to.be.false
+
+      nbErrorsOpt = Object.keys(form.options.errors).length
+
+      form.option 'errors',
+        customType: 'Custom error msg added'
+
+      expect(Object.keys(form.options.errors).length).to.equal ++nbErrorsOpt
 
     it 'supports option.autoTrim', ->
       form = new Form
@@ -335,6 +346,42 @@ describe 'Form', ->
       fn = ->
         form.path('get').get
           get: null
+      expect(fn).to.throw TypeError
+
+    it 'supports form.getData', ->
+      form = new Form
+        a:
+          type: String
+          get: (val) ->
+            return this.get('b.c') + ' ' + val
+        b:
+          c:
+            type: Number
+            get: (val) ->
+              return val / 100
+
+      form.set
+        a: 'CHF'
+        b:
+          c: 99995
+
+      expect(form.getData()).to.deep.equal
+        a: '999.95 CHF'
+        b:
+          c: 999.95
+
+    it 'can have a 100% coverage', ->
+      form = new Form
+        a: String
+        b: Date
+
+      form.path('a').cast null
+      form.path('b').cast null
+      fn = ->
+        o = ->
+        o.toString = undefined
+        form.path('a').cast o
+
       expect(fn).to.throw TypeError
 
 

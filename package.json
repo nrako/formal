@@ -1,6 +1,6 @@
 {
   "name": "formal",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Simple, flexible node.js form module with casting and validation; inspired by mongoose",
   "main": "index.js",
   "scripts": {
