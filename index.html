@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Formal by nrako</title>
+    <title>Conform by nrako</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Formal</h1>
+        <h1>Conform</h1>
         <p>Simple, flexible node.js form module with casting and validation; highly inspired by mongoose</p>
 
         <p class="view"><a href="https://github.com/nrako/formal">View the Project on GitHub <small>nrako/formal</small></a></p>
@@ -28,9 +28,12 @@
         </ul>
       </header>
       <section>
-        <h1>Formal</h1>
+        <h1>Formal <a href="https://travis-ci.org/nrako/formal"><img src="https://travis-ci.org/nrako/formal.png?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/r/nrako/formal"><img src="https://coveralls.io/repos/nrako/formal/badge.png?branch=master" alt="Coverage Status"></a> <a href="https://gemnasium.com/nrako/formal"><img src="https://gemnasium.com/nrako/formal.png" alt="Dependency Status"></a>
+</h1>
 
-<p><strong>Formal is an awesome node.js FORM module with casting and validation inspired by mongoose!</strong></p>
+<p>Formal is a Form module for node.js inspired by mongoose, Formal provides casting, validation and much more!</p>
+
+<p>DRY! If you use Mongoose, use <a href="https://github.com/nrako/formal-mongoose">Formal-Mongoose</a> to define your form from an existing schema.</p>
 
 <h2>Example</h2>
 
@@ -47,24 +50,29 @@
   <span class="nx">email</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
     <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">match</span><span class="o">:</span> <span class="sr">/^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/</span><span class="p">,</span>
-    <span class="nx">attributes</span><span class="o">:</span> <span class="p">{</span>
-      <span class="nx">type</span><span class="o">:</span> <span class="s1">'email'</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="nx">age</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="nb">Number</span><span class="p">,</span> <span class="nx">min</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
-<span class="p">});</span>
+    <span class="nx">match</span><span class="o">:</span> <span class="p">[</span><span class="sr">/^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/</span><span class="p">,</span> <span class="s1">'email],</span>
+<span class="s1">    attributes: {</span>
+<span class="s1">      type: '</span><span class="nx">email</span><span class="s1">'</span>
+<span class="s1">    }</span>
+<span class="s1">  },</span>
+<span class="s1">  age: {type: Number, min: 18}</span>
+<span class="s1">}, {</span>
+<span class="s1">  errors: {</span>
+<span class="s1">    // custom error message for match validator</span>
+<span class="s1">    email: '</span><span class="nx">Value</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">a</span> <span class="nx">valid</span> <span class="nx">email</span><span class="s1">'</span>
+<span class="s1">}</span>
+<span class="s1">});</span>
 
-<span class="nx">form</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
-  <span class="nx">name</span><span class="o">:</span> <span class="p">{</span><span class="nx">family</span><span class="o">:</span> <span class="s1">'Martinez'</span><span class="p">},</span>
-  <span class="s1">'name.first'</span><span class="o">:</span> <span class="s1">'José Luis Chavez'</span><span class="p">,</span>
-  <span class="nx">age</span><span class="o">:</span> <span class="mi">12</span>
-<span class="p">});</span>
+<span class="s1">form.set({</span>
+<span class="s1">  name: {family: '</span><span class="nx">Martinez</span><span class="s1">'},</span>
+<span class="s1">  '</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="s1">': '</span><span class="nx">Jos</span><span class="err">é</span> <span class="nx">Luis</span> <span class="nx">Chavez</span><span class="s1">',</span>
+<span class="s1">  age: 12</span>
+<span class="s1">});</span>
 
-<span class="nx">form</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="c1">// missing required email, age to low</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">form</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'name.first.0'</span><span class="p">));</span> <span class="c1">// José</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">form</span><span class="p">.</span><span class="kr">export</span><span class="p">());</span>
+<span class="s1">form.validate(function (err) {</span>
+<span class="s1">  console.log(err); // missing required email, age to low</span>
+<span class="s1">  console.log(form.get('</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="mi">0</span><span class="err">'</span><span class="p">));</span> <span class="c1">// José</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">form</span><span class="p">.</span><span class="kr">export</span><span class="p">());</span> <span class="c1">// data with nice error messages</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -93,73 +101,189 @@
 
 <ul>
 <li>render form to html (this will be supported via an external module)</li>
-</ul><h3>To comes... maybe</h3>
+<li>define a form from a mongoose schema, but <a href="https://github.com/nrako/formal-mongoose">Formal-Mongoose</a> does!</li>
+</ul><h3>TODO... maybe</h3>
 
 <ul>
-<li>support for sub-Form</li>
-<li>support for sub-[Form]</li>
-<li>incoming npm module to define the form from an existing mongoose schema</li>
-<li>incoming npm (decorator) module to render the form into html via consolidate.js</li>
+<li>support for sub-Form and array of [Form]</li>
+<li>npm package to "decorate" a form, render the form into html via <a href="https://github.com/visionmedia/consolidate.js/">consolidate.js</a>
+</li>
 <li>support browser</li>
 </ul><h2>API</h2>
 
-<p>Summary of the most useful methods. For a complete list see <a href="http://nrako.github.io/formal">documentation</a>.</p>
+<p>Summary of the most useful methods.<br>
+For a complete list see <a href="http://nrako.github.io/formal">gh-pages documentation</a>.</p>
 
 <h3>new Form(Object:definition[, Object:option]):instance</h3>
 
-<p>For connect and express the alternative factory method can be used as a quick helper to
-create a new instance and return form.middleware() to monkey patch the request and
-response object.</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Form</span><span class="p">({</span>
+  <span class="nx">username</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="nx">trim</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="nx">password</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="nx">trim</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="p">{</span>
+  <span class="nx">errors</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">required</span><span class="o">:</span> <span class="s1">'Please fill out this field'</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
 
-<div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/url'</span><span class="p">,</span>
+<h4>Options</h4>
+
+<div class="highlight"><pre><span class="p">{</span>
+  <span class="nx">dataSources</span><span class="o">:</span> <span class="p">[</span><span class="s1">'body'</span><span class="p">,</span> <span class="s1">'query'</span><span class="p">,</span> <span class="s1">'params'</span><span class="p">],</span> <span class="c1">// sources of data used by the route-middleware</span>
+  <span class="nx">autoTrim</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>  <span class="c1">// automatically add trim options to fields</span>
+  <span class="nx">autoLocals</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>  <span class="c1">// form.middleware adds form.export + validation results to res.locals</span>
+  <span class="nx">errors</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// default errors message, can be extanded to match your own error type</span>
+    <span class="nx">required</span><span class="o">:</span> <span class="s1">'This is a required field'</span><span class="p">,</span>
+    <span class="nx">min</span><span class="o">:</span> <span class="s1">'Value must be greater than or equal to &lt;%= data.min %&gt;'</span><span class="p">,</span>
+    <span class="nx">max</span><span class="o">:</span> <span class="s1">'Value must be less than or equal to &lt;%= data.max %&gt;'</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>Connect and express route-middleware</h4>
+
+<p>For connect and express calling the constructor function will operate as a shorthand which return
+the result of <code>form.middleware()</code> which will monkey patch the request and the response object.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'formal'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/url'</span><span class="p">,</span>
   <span class="c1">// sames as (new Form({...})).middleware()</span>
   <span class="nx">form</span><span class="p">({</span>
-    <span class="nx">fieldA</span><span class="o">:</span> <span class="nb">String</span>
+    <span class="nx">username</span><span class="o">:</span> <span class="nb">String</span>
   <span class="p">}),</span>
   <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">form</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">fieldA</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">form</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">);</span>
 </pre></div>
 
 <h3>form.field(obj:Object):this</h3>
 
-<p>Define a new field.</p>
+<p>Define and add a new field to the form.</p>
 
-<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+<h4>Alias</h4>
+
+<p><code>form.add()</code></p>
+
+<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">field</span><span class="p">({</span>
   <span class="nx">example</span><span class="o">:</span> <span class="p">{</span>
     <span class="s1">'of.a.nested.field'</span><span class="o">:</span> <span class="nb">String</span>
   <span class="p">}</span>
 <span class="p">});</span>
 </pre></div>
 
-<h3>form.virtual(name:String, options:Object)</h3>
-
-<h3>form.path(path:String):Field (arity 1)</h3>
-
-<h3>form.path(path:String, obj:Object):this (arity 2)</h3>
-
 <h3>form.set(path:String|obj:Object[, value])</h3>
+
+<p>Set values.</p>
+
+<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+  <span class="nx">username</span><span class="o">:</span> <span class="s1">'nrako'</span>
+<span class="p">});</span>
+
+<span class="nx">form</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'example.of.a.nested.field'</span><span class="p">,</span> <span class="s1">'overboard nested path example'</span><span class="p">);</span>
+</pre></div>
 
 <h3>form.get(path:String):value</h3>
 
+<p>Return a value with getters applied.</p>
+
+<div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">form</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'username'</span><span class="p">));</span> <span class="c1">//nrako</span>
+</pre></div>
+
+<h3>form.getData():Object</h3>
+
+<p>Return tree data with getters applied</p>
+
+<div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">form</span><span class="p">.</span><span class="nx">getData</span><span class="p">());</span> <span class="c1">// Object</span>
+</pre></div>
+
 <h3>form.validate(callback(err):Function)</h3>
 
-<p>Validate all fields and return an err object, if any, via the callback function.</p>
+<p>Validate all fields and return an ValidationError object, if any, via the callback function.</p>
+
+<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="c1">// ValidationError object</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>form.export(err:ValidationError):Object</h3>
+
+<p><code>err</code>: a ValidationError object returned by <code>from.validate</code></p>
+
+<p>Export and return an object which includes all friendly message error when error
+template message is defined in <code>options.errors</code>.</p>
+
+<div class="highlight"><pre><span class="nx">form</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="kr">export</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// nrako</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">password</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span> <span class="c1">// Please fill out this field</span>
+<span class="p">});</span>
+</pre></div>
 
 <h3>form.middleware():Function(req, res, next)</h3>
 
 <p>Provide a route-middleware à la connect/express which will monkey patch
-the <code>req.body.form</code> and <code>res.locals.form</code>.</p>
+the <code>request.form</code> and <code>response.locals.form</code>.</p>
+
+<div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/url'</span><span class="p">,</span>
+  <span class="nx">form</span><span class="p">.</span><span class="nx">middleware</span><span class="p">({</span>
+    <span class="nx">username</span><span class="o">:</span> <span class="nb">String</span>
+  <span class="p">}),</span>
+  <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">getData</span><span class="p">());</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+
+<h2>Custom error message for a custom validation</h2>
+
+<p>Custom error message within the result of <code>form.export(errors)</code> are available with the form <code>options.errors</code>.
+Error message must be a valid <a href="http://lodash.com/docs#template">lodash</a> string template which is populate with the field content.</p>
+
+<h3>Example</h3>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Form</span><span class="p">({</span>
+  <span class="nx">a</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="nx">validate</span><span class="o">:</span> <span class="p">[</span><span class="sr">/^a/i</span><span class="p">,</span> <span class="s1">'startWithA'</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nx">b</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="nx">validate</span><span class="o">:</span> <span class="p">[</span><span class="sr">/^b/i</span><span class="p">,</span> <span class="s1">'startWithB'</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="p">{</span>
+  <span class="nx">errors</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">'startWithA'</span><span class="o">:</span> <span class="s1">'Value &lt;%= value %&gt; should start with "a"'</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">form</span><span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s1">'errors'</span><span class="p">,</span> <span class="p">{</span><span class="nx">startWithB</span><span class="o">:</span> <span class="s1">'Value &lt;%= value %&gt; should start with "b"'</span><span class="p">})</span>
+
+<span class="nx">form</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">a</span><span class="o">:</span> <span class="s1">'Babar'</span><span class="p">,</span> <span class="s1">'b'</span><span class="o">:</span> <span class="s1">'Basile'</span><span class="p">});</span>
+
+<span class="nx">form</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">form</span><span class="p">.</span><span class="kr">export</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>See the <a href="https://github.com/nrako/formal/blob/master/test/form.validation.spec.coffee">tests</a> for more examples.</p>
 
 <h2>Test</h2>
 
-<p><code>npm test</code>
-<a href="http://nrako.github.io/formal/coverage.html">Coverage</a>
-<code>npm run-script coverage</code></p>
+<p><code>npm test</code><br><a href="http://nrako.github.io/formal/coverage.html">Mocha Coverage</a><br><code>npm run-script coverage</code><br><a href="https://coveralls.io/r/nrako/formal">On Coveralls.io</a></p>
 
-<p>Tests are in Coffee-script and easy to read! Provides a great way to understand the API.</p>
+<p>All tests are in Coffee-script, hence easy to read! Provides a great way to understand the API ;)</p>
 
 <h2>LICENSE</h2>
 
