@@ -29,7 +29,7 @@ describe 'Form validation', ->
       expect(err.toString()).to.be.a.string
       expect(err.errors[1]).to.be.an.instanceof require '../lib/errors/validator'
       expect(err.errors[2]).to.be.an.instanceof require '../lib/errors/validator'
-      expect(err.errors[3]).to.be.an.instanceof require '../lib/errors/validator'
+      expect(err.errors[3]).to.be.undefined
 
       form.path(1).max 9, 'custom msg'
       form.path(3).min(null)

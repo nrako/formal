@@ -206,7 +206,7 @@ describe 'Form', ->
       expect(form.get '3').to.equal true
       expect(form.get '4').to.equal true
       expect(form.get '5').to.equal null
-      expect(form.get '6').to.equal undefined
+      expect(form.get '6').to.be.null
       expect(form.get '7').to.equal false
       expect(form.get '8').to.equal false
 
@@ -275,7 +275,7 @@ describe 'Form', ->
         locals: {}
 
       cb = ->
-        expect(request.form.get 'test').to.be.undefined
+        expect(request.form.get 'test').to.be.null
         expect(request.form.get 'test2').to.equal 'query'
         expect(request.form.get 'test3').to.equal 'params'
 
