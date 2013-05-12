@@ -113,9 +113,16 @@ var form = new Form({
     required: 'This is a required field',
     min: 'Value must be greater than or equal to <%= data.min %>',
     max: 'Value must be less than or equal to <%= data.max %>',
+    enum: 'Value must be one of the following options: <%= data.enum.join(\', \') %>',
+    regexp: 'Value is invalid and should match <%= data.match %>'
   }
 }
 ```
+
+##### `errors`
+
+To define custom errors, refer to [Custom error message for a custom validation](#CustomError)
+
 
 #### Connect and express route-middleware
 
@@ -222,7 +229,7 @@ app.post('/url',
 );
 ```
 
-## Custom error message for a custom validation
+## <a id="CustomError"></a>Custom error message for a custom validation
 
 Custom error message within the result of `form.export(errors)` are available with the form `options.errors`.
 Error message must be a valid [lodash](http://lodash.com/docs#template) string template which is populate with the field content.

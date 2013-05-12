@@ -53,6 +53,7 @@ describe 'Form route-middleware', ->
     cb = ->
       form = response.locals.form
 
+      expect(form.errors.length).to.equal 3
       expect(form.title.data.attributes.placeholder).to.equal 'Title'
       expect(form.title.error).to.be.a 'string'
       expect(form.tags.value).to.deep.equal ['this','is','a','test']

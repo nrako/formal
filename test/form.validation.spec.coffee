@@ -8,7 +8,7 @@ FieldTypes = Form.FieldTypes
 Field = require '../lib/field/field'
 
 describe 'Form validation', ->
-  it 'supports min max shortcuts mongoose-like validators on Number', (done) ->
+  it 'supports min max shorthand mongoose-like validators on Number', (done) ->
     form = new Form
       1:
         type: Number
@@ -42,7 +42,7 @@ describe 'Form validation', ->
 
         done()
 
-  it 'supports enum and match shortcults mongoose-like validators on String', (done) ->
+  it 'supports enum and match shorthand mongoose-like validators on String', (done) ->
     form = new Form
       'one':
         type: String
@@ -158,6 +158,12 @@ describe 'Form validation', ->
       a:
         type: String
         required: true
+      aa:
+        type: String
+        enum: ['a', 'b', 'c']
+      ab:
+        type: String
+        match: /^a/
       b:
         type: Number
         min: 8
@@ -174,16 +180,22 @@ describe 'Form validation', ->
       startWithA: '<%= data.label %> with value "<%= value %>" must start with "a"'
 
     form.set
+      ab: 'b'
       b: 0
       c: 23
       d: 'test'
 
     form.validate (err) ->
       o = form.export(err)
-      expect(o.a.error).to.equal _.template(form.options.errors.required, {})
-      expect(o.b.error).to.equal _.template(form.options.errors.min, {data: {min: 8}})
-      expect(o.c.error).to.equal _.template(form.options.errors.max, {data: {max: 8}, value: '23'})
-      expect(o.d.error).to.equal _.template(form.options.errors.startWithA, {data: {label: 'Field D'}, value: 'test'})
 
+      try
+        expect(o.a.error).to.equal _.template(form.options.errors.required, {})
+        expect(o.aa.error).to.equal _.template(form.options.errors.enum, {data: enum: ['a', 'b', 'c']})
+        expect(o.ab.error).to.equal _.template(form.options.errors.regexp, {data: match: /^a/})
+        expect(o.b.error).to.equal _.template(form.options.errors.min, {data: {min: 8}})
+        expect(o.c.error).to.equal _.template(form.options.errors.max, {data: {max: 8}, value: '23'})
+        expect(o.d.error).to.equal _.template(form.options.errors.startWithA, {data: {label: 'Field D'}, value: 'test'})
+      catch e
+        return done e
 
       done()
