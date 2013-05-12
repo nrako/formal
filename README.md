@@ -138,6 +138,7 @@ app.post('/url',
   }),
   function (req, res) {
     console.log(req.form);
+    console.log(res.locals.form.errors);
     console.log(res.locals.form.username.value);
   }
 );
@@ -223,8 +224,8 @@ app.post('/url',
     username: String
   }),
   function (req, res) {
-    console.log(req.form.getData());
-    console.log(res.locals.form.username.value);
+    if (req.locals.form.errors.length)
+      console.log(req.form.getData()); // do something with it
   }
 );
 ```

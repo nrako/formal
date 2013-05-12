@@ -1,6 +1,7 @@
 
 ### v0.3.0 — 2013-05-12
 
+* Added errors array in result of export `form.export(err).errors`
 * Added `options.errors.match` and `options.errors.enum`
 
 ### v0.2.0 — 2013-05-09
