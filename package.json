@@ -1,6 +1,6 @@
 {
   "name": "formal",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Simple, flexible node.js form module with casting and validation; inspired by mongoose",
   "main": "index.js",
   "scripts": {
@@ -18,11 +18,11 @@
   },
   "bugs": { "url" : "http://github.com/nrako/formal/issues"},
   "keywords": [
-    "connect",
-    "express",
     "form",
     "validation",
-    "mongoose"
+    "mongoose",
+    "connect",
+    "express"
   ],
   "author": "@nrako <nico@nrako.com>",
   "license": "MIT",
