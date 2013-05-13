@@ -16,7 +16,9 @@
     "type": "git",
     "url": "http://github.com/nrako/formal"
   },
-  "bugs": { "url" : "http://github.com/nrako/formal/issues"},
+  "bugs": {
+    "url": "http://github.com/nrako/formal/issues"
+  },
   "keywords": [
     "form",
     "validation",
@@ -48,6 +50,7 @@
     "matchdep": "~0.1.2",
     "blanket": "~1.1.4",
     "travis-cov": "~0.2.4",
-    "coffee-script": "~1.6.2"
+    "coffee-script": "~1.6.2",
+    "grunt-jsonlint": "~1.0.0"
   }
 }

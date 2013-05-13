@@ -28,6 +28,12 @@ module.exports = function(grunt) {
       files: ['lib/**/*.js', 'test/**/*.js']
     },
 
+    jsonlint: { // grunt-jsonlint
+      package: {
+        src: [ 'package.json' ]
+      }
+    },
+
     simplemocha: { // grunt-simple-mocha
       options: {
         compilers: 'coffee:coffee-script',
@@ -99,7 +105,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['jsvalidate']);
 
   // Run server-side tests
-  grunt.registerTask('test', ['jshint', 'jsvalidate', 'simplemocha']);
+  grunt.registerTask('test', ['jshint', 'jsvalidate', 'jsonlint', 'simplemocha']);
   grunt.registerTask('travis', ['mochacov:test']);
 
   // Generates the docs api (dox) and the plato report
