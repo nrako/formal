@@ -2,7 +2,7 @@
 
 Formal is a Form module for node.js inspired by mongoose, Formal provides casting, validation and much more!
 
-DRY! If you use Mongoose, use [Formal-Mongoose](https://github.com/nrako/formal-mongoose) to define your form from an existing schema.
+DRY! If you use Mongoose, use [Formal-Mongoose](https://github.com/nrako/formal-mongoose) to define your form by using an existing schema.
 
 ## Example
 
