@@ -1,4 +1,4 @@
-# Formal [![Build Status](https://travis-ci.org/nrako/formal.png?branch=master)](https://travis-ci.org/nrako/formal) [![Coverage Status](https://coveralls.io/repos/nrako/formal/badge.png?branch=master)](https://coveralls.io/r/nrako/formal) [![Dependency Status](https://gemnasium.com/nrako/formal.png)](https://gemnasium.com/nrako/formal)
+# Formal [![Build Status](https://travis-ci.org/nrako/formal.png?branch=master)](https://travis-ci.org/nrako/formal) [![Coverage Status](https://coveralls.io/repos/nrako/formal/badge.png?branch=master)](https://coveralls.io/r/nrako/formal) [![Dependency Status](https://gemnasium.com/nrako/formal.png)](https://gemnasium.com/nrako/formal) [![Code Climate](https://codeclimate.com/github/nrako/formal.png)](https://codeclimate.com/github/nrako/formal)
 
 Formal is a Form module for node.js inspired by mongoose, Formal provides casting, validation and much more!
 
