@@ -33,7 +33,8 @@
   },
   "dependencies": {
     "lodash": "~2.4.1",
-    "mpath": "~0.2.1"
+    "mpath": "~0.2.1",
+    "inherits": "~2.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
