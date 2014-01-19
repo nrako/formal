@@ -32,25 +32,25 @@
     "node": ">= v0.8.0"
   },
   "dependencies": {
-    "lodash": "~1.2.1",
+    "lodash": "~2.4.1",
     "mpath": "~0.2.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
     "glob": "~3.2.1",
-    "grunt-contrib-clean": "~0.4.1",
-    "grunt-contrib-yuidoc": "~0.4.0",
-    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-yuidoc": "~0.5.0",
+    "grunt-contrib-jshint": "~0.8.0",
     "grunt-jsvalidate": "~0.2.1",
     "grunt-simple-mocha": "~0.4.0",
-    "grunt-mocha-cov": "0.0.4",
-    "grunt-dox": "~0.4.1",
+    "grunt-mocha-cov": "~0.1.1",
+    "grunt-dox": "~0.5.0",
     "grunt-plato": "~0.2.0",
-    "chai": "~1.6.0",
-    "matchdep": "~0.1.2",
+    "chai": "~1.8.1",
+    "matchdep": "~0.3.0",
     "blanket": "~1.1.4",
     "travis-cov": "~0.2.4",
-    "coffee-script": "~1.6.2",
+    "coffee-script": "~1.6.3",
     "grunt-jsonlint": "~1.0.0"
   }
 }

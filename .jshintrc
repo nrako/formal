@@ -3,7 +3,6 @@
     "console": true
   },
   "node": true,
-  "es5" : true,
   "esnext": true,
   "bitwise": true,
   "immed": true,
