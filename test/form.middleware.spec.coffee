@@ -1,6 +1,5 @@
 ### global describe, it, beforeEach ###
 
-_ = require 'lodash'
 chai = require 'chai'
 expect = chai.expect
 Form = require '../lib/form'

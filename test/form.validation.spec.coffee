@@ -1,6 +1,6 @@
 ### global describe, it, beforeEach ###
 
-_ = require 'lodash'
+template = require 'lodash-template'
 chai = require 'chai'
 expect = chai.expect
 Form = require '../lib/form'
@@ -128,17 +128,22 @@ describe 'Form validation', ->
       'array':
         type: [String]
         required: true
+      nested:
+        deep:
+          type: String
+          required: true
 
     form.set
       'two': 'test'
 
-    expect(form.requiredPaths()).to.deep.equal ['one', 'date', 'array']
+    expect(form.requiredPaths()).to.deep.equal ['one', 'date', 'array', 'nested.deep']
 
     form.validate (err) ->
-      expect(Object.keys(err.errors).length).to.equal 3
+      expect(Object.keys(err.errors).length).to.equal 4
       expect(err.errors['one']).to.be.an.instanceof require '../lib/errors/validator'
       expect(err.errors['date']).to.be.an.instanceof require '../lib/errors/validator'
       expect(err.errors['array']).to.be.an.instanceof require '../lib/errors/validator'
+      expect(err.errors['nested.deep']).to.be.an.instanceof require '../lib/errors/validator'
 
       form.path('tree').required true
       form.path('one').required false
@@ -148,7 +153,7 @@ describe 'Form validation', ->
         'one': null
 
       form.validate (err) ->
-        expect(Object.keys(err.errors).length).to.equal 2
+        expect(Object.keys(err.errors).length).to.equal 3
         expect(err.errors['one']).to.be.undefined
         expect(err.errors['tree']).to.be.an.instanceof require '../lib/errors/validator'
         done()
@@ -189,12 +194,12 @@ describe 'Form validation', ->
       o = form.export(err)
 
       try
-        expect(o.a.error).to.equal _.template(form.options.errors.required, {})
-        expect(o.aa.error).to.equal _.template(form.options.errors.enum, {data: enum: ['a', 'b', 'c']})
-        expect(o.ab.error).to.equal _.template(form.options.errors.regexp, {data: match: /^a/})
-        expect(o.b.error).to.equal _.template(form.options.errors.min, {data: {min: 8}})
-        expect(o.c.error).to.equal _.template(form.options.errors.max, {data: {max: 8}, value: '23'})
-        expect(o.d.error).to.equal _.template(form.options.errors.startWithA, {data: {label: 'Field D'}, value: 'test'})
+        expect(o.a.error).to.equal template(form.options.errors.required, {})
+        expect(o.aa.error).to.equal template(form.options.errors.enum, {data: enum: ['a', 'b', 'c']})
+        expect(o.ab.error).to.equal template(form.options.errors.regexp, {data: match: /^a/})
+        expect(o.b.error).to.equal template(form.options.errors.min, {data: {min: 8}})
+        expect(o.c.error).to.equal template(form.options.errors.max, {data: {max: 8}, value: '23'})
+        expect(o.d.error).to.equal template(form.options.errors.startWithA, {data: {label: 'Field D'}, value: 'test'})
       catch e
         return done e
 
